@@ -4,7 +4,7 @@ I've been doing a lot of VideoBeast development recently, which involves much
 writing of large graphical assets directly into video memory using SLIDE in 
 VideoBeast mode. This is great DX, but it can be quite slow. I have a 256KB 
 background bitmap (all the same colour) that takes nearly two minutes to transfer
-on its own. Every time I watch it load I think *"....really should all compression 
+on its own. Every time I watch it load I think *"....really should add compression 
 to SLIDE..."*.
 
 But which compression? And why? That sounds like a job four our pal Claude!
