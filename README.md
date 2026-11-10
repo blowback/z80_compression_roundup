@@ -1,5 +1,16 @@
 # Z80 compression for MicroBeast serial transfer
 
+I've been doing a lot of VideoBeast development recently, which involves much 
+writing of large graphical assets directly into video memory using SLIDE in 
+VideoBeast mode. This is great DX, but it can be quite slow. I have a 256KB 
+background bitmap (all the same colour) that takes nearly two minutes to transfer
+on its own. Every time I watch it load I think *"....really should all compression 
+to SLIDE..."*.
+
+But which compression? And why? That sounds like a job four our pal Claude!
+
+# What Claude found
+
 The question this project answers: **when sending files from a modern host to
 a MicroBeast (8 MHz Z80, CP/M) over a 19200 baud serial line, which
 compression format gets the file there and decoded fastest, and is it worth
