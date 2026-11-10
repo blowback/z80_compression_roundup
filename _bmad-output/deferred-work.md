@@ -1,0 +1,3 @@
+- source_plan: `_bmad-output/plan-z80-line-simulation.md`
+  summary: Banked ports of all eight decoders (ZX0, LZSA2, aPLib, Exomizer, RIP, LZ4, upkr, Shrinkler) and a banked simulation mode. Output slides through windows 0–2 with the output pointer kept in window 2 (32 KB history, offsets capped at 32,768). Input comes through an 8 KB receive ring with RTS/CTS flow control in window 3, and pages are remapped by real OUT writes to ports 0x70–0x72.
+  evidence: The user chose to model banking with real port writes for all eight decoders, and accepted this layout on 2026-11-09. The work was split from the flat line simulation because it roughly doubles that build. It depends on build 1's emulator support for the paging ports and the ring/flow-control receive model.

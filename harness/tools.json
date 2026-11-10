@@ -1,0 +1,114 @@
+{
+  "_comment": "Pinned compressor sources. 'ref' is a tag, or a full commit SHA when the repo has no tags. Paths in 'cwd' and 'binaries' are relative to the clone; {compat} expands to harness/compat. 'sources' lists harness files (relative to harness/) built into the tool: the tool is rebuilt when one is newer than its stamp. 'patches' are Python regex substitutions applied to a clean checkout before building.",
+  "tools": {
+    "zx0": {
+      "repo": "https://github.com/einar-saukas/ZX0",
+      "ref": "ecde3a2ae05061fe06469ed46df81a33b7de7d86",
+      "version": "2.2 (no tags; last commit 2021-12-17)",
+      "build": [
+        {"cwd": "src", "cmd": ["gcc", "-O2", "-o", "zx0", "zx0.c", "optimize.c", "compress.c", "memory.c"]},
+        {"cwd": "src", "cmd": ["gcc", "-O2", "-o", "dzx0", "dzx0.c"]}
+      ],
+      "binaries": {"zx0": "src/zx0", "dzx0": "src/dzx0"}
+    },
+    "salvador": {
+      "repo": "https://github.com/emmanuel-marty/salvador",
+      "ref": "1.4.2",
+      "version": "1.4.2",
+      "build": [{"cmd": ["make", "-j8"]}],
+      "binaries": {"salvador": "salvador"}
+    },
+    "lzsa": {
+      "repo": "https://github.com/emmanuel-marty/lzsa",
+      "ref": "1.4.1",
+      "version": "1.4.1",
+      "build": [{"cmd": ["make", "-j8"]}],
+      "binaries": {"lzsa": "lzsa"}
+    },
+    "apultra": {
+      "repo": "https://github.com/emmanuel-marty/apultra",
+      "ref": "1.4.8",
+      "version": "1.4.8",
+      "build": [{"cmd": ["make", "-j8"]}],
+      "binaries": {"apultra": "apultra"}
+    },
+    "oapack": {
+      "repo": "https://gitlab.com/eugene77/oapack.git",
+      "ref": "29d34485f9b22b5c7e2209bc155961290f440e6c",
+      "version": "2026.04.09 (no tags)",
+      "patches": [
+        {"files": "*.cpp", "pattern": "throw (std::)?exception\\(", "replace": "throw msvc_exception("},
+        {"files": "*.cpp", "pattern": "([0-9])i64\\b", "replace": "\\1LL"}
+      ],
+      "build": [
+        {"cmd": ["sh", "-c", "g++ -O2 -std=gnu++14 -fpermissive -w -include {compat}/msvc_compat.h -o oapack *.cpp"]}
+      ],
+      "binaries": {"oapack": "oapack"}
+    },
+    "exomizer": {
+      "repo": "https://bitbucket.org/magli143/exomizer",
+      "ref": "3.1.2",
+      "version": "3.1.2",
+      "build": [{"cwd": "src", "cmd": ["make", "-j8", "exomizer"]}],
+      "binaries": {"exomizer": "src/exomizer"}
+    },
+    "rip": {
+      "repo": "https://gitlab.com/eugene77/rip.git",
+      "ref": "5861ffbc4c5be26fbc38f08bef41544fd6afbf2d",
+      "version": "2023.03.30 (no tags)",
+      "patches": [
+        {"files": "*.cpp", "pattern": "throw (std::)?exception\\(", "replace": "throw msvc_exception("},
+        {"files": "compress.cpp", "pattern": "\\[&\\]\\(int n, string& code\\)", "replace": "[&](int n, const string& code)"}
+      ],
+      "build": [
+        {"cmd": ["sh", "-c", "g++ -O2 -std=gnu++14 -fpermissive -w -include {compat}/msvc_compat.h -o rip *.cpp"]}
+      ],
+      "binaries": {"rip": "rip"}
+    },
+    "lz4ultra": {
+      "repo": "https://github.com/emmanuel-marty/lz4ultra",
+      "ref": "1.3.0",
+      "version": "1.3.0",
+      "build": [{"cmd": ["make", "-j8"]}],
+      "binaries": {"lz4ultra": "lz4ultra"}
+    },
+    "upkr": {
+      "repo": "https://github.com/exoticorn/upkr",
+      "ref": "v0.2.2",
+      "version": "0.2.2",
+      "build": [{"cmd": ["cargo", "build", "--release", "--locked"]}],
+      "binaries": {"upkr": "target/release/upkr"}
+    },
+    "shrinkler": {
+      "repo": "https://github.com/askeksa/Shrinkler",
+      "ref": "v4.7",
+      "version": "4.7",
+      "build": [{"cmd": ["make", "-j8"]}],
+      "binaries": {"Shrinkler": "build/native/Shrinkler"}
+    },
+    "sjasmplus": {
+      "repo": "https://github.com/z00m128/sjasmplus",
+      "ref": "v1.24.0",
+      "version": "1.24.0 (assembles the Z80 decoders for linesim)",
+      "build": [{"cmd": ["make", "-j8", "USE_LUA=0"]}],
+      "binaries": {"sjasmplus": "sjasmplus"}
+    },
+    "z80depacker": {
+      "repo": "https://github.com/uniabis/z80depacker",
+      "ref": "d57ec2ec878b9b66f4ede7f6ebdd59af913cda24",
+      "version": "no tags; Z80 decoder sources (decoders.py assembles them)",
+      "build": [],
+      "binaries": {}
+    },
+    "z80": {
+      "repo": "https://github.com/superzazu/z80",
+      "ref": "d64fe10a2274e5e40019b1086bf7d8990cbc5f23",
+      "version": "no tags; MIT Z80 core, built into linesim",
+      "sources": ["sim/linesim.c"],
+      "build": [
+        {"cmd": ["gcc", "-O2", "-std=gnu99", "-Wall", "-I.", "-o", "linesim", "{compat}/../sim/linesim.c", "z80.c", "-lm"]}
+      ],
+      "binaries": {"linesim": "linesim"}
+    }
+  }
+}

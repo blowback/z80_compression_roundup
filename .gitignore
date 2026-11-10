@@ -1,0 +1,5 @@
+harness/tools/
+harness/results/
+harness/results-*/
+__pycache__/
+_bmad/render/
